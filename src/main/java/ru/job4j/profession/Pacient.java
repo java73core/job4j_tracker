@@ -6,21 +6,25 @@ public class Pacient {
     private int years;
     private String diagnose;
 
-    Pacient(){
+    public Pacient() {
 
     }
-    Pacient(String name, String surname, int years){
+
+    public Pacient(String name, String surname, int years) {
         this.name = name;
         this.surname = surname;
         this.years = years;
     }
-    public String getDiagnose(){
+
+    public String getDiagnose() {
        return this.diagnose;
     }
-    public String getName(){
+
+    public String getName() {
         return this.name;
     }
-    public String getSurname(){
+
+    public String getSurname() {
         return this.surname;
     }
 }

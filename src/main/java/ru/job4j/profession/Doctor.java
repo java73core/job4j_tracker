@@ -11,16 +11,21 @@ public class Doctor extends Profession {
         super();
     }
 
-    public String getExperience(){
+    public String getExperience() {
         return this.experience;
     }
-    public  String getLicense(){
+
+    public  String getLicense() {
+
         return this.license;
     }
-    public char getSex(){
+
+    public char getSex() {
+
         return this.sex;
     }
-    Doctor(String name, String education, String birthday, String experience, String license, char sex) {
+
+   public Doctor(String name, String education, String birthday, String experience, String license, char sex) {
         super(name, education, birthday);
         this.experience = experience;
         this.license = license;

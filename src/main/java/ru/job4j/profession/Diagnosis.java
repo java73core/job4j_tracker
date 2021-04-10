@@ -5,15 +5,16 @@ public class Diagnosis {
     private String result;
     private String healing;
 
-    Diagnosis(){
-
+   public Diagnosis() {
     }
-    Diagnosis(String analyzes, String result, String healing){
+
+    public Diagnosis(String analyzes, String result, String healing) {
         this.analyzes = analyzes;
         this.healing = healing;
         this.result = result;
     }
-    public void setAnalyzes(String analyzes){
+
+    public void setAnalyzes(String analyzes) {
         this.analyzes = analyzes;
     }
 

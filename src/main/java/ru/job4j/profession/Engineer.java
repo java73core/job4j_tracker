@@ -6,7 +6,8 @@ public class Engineer extends Profession {
     private String knowledge;
     private String skill;
     private String motivation;
-    Engineer(String name, String education, String birthday, String knowledge, String skill, String motivation) {
+
+    public Engineer(String name, String education, String birthday, String knowledge, String skill, String motivation) {
         super(name, education, birthday);
         this.knowledge = knowledge;
         this.motivation = motivation;
@@ -16,13 +17,15 @@ public class Engineer extends Profession {
     public Engineer() {
     }
 
-    public String getKnowledge(){
+    public String getKnowledge() {
         return this.knowledge;
     }
-    public String getSkill(){
+
+    public String getSkill() {
         return this.skill;
     }
-    public String getMotivation(){
+
+    public String getMotivation() {
         return this.motivation;
     }
 }
