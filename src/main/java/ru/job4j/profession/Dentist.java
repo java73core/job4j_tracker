@@ -9,8 +9,8 @@ public class Dentist extends Doctor {
     public Dentist() {
     }
 
-    public Dentist(String frequentCustomer, String qualityOfWork, String name, String education, String birthday, String experience, String license, char sex) {
-       super(name, education, birthday, experience, license, sex);
+    public Dentist(String frequentCustomer, String qualityOfWork) {
+       super();
         this.frequentCustomer = frequentCustomer;
         this.qualityOfWork = qualityOfWork;
     }

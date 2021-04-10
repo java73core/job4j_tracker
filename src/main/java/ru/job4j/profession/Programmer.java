@@ -8,8 +8,8 @@ public class Programmer extends Engineer {
 
     }
 
-    public Programmer(String hardSkills, String jobOffers, String name, String education, String birthday, String knowledge, String skill, String motivation) {
-        super(name, education, birthday, knowledge, skill, motivation);
+    public Programmer(String hardSkills, String jobOffers) {
+        super();
         this.hardSkills = hardSkills;
         this.jobOffers = jobOffers;
     }

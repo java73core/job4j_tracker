@@ -9,8 +9,8 @@ public class Builder extends Engineer {
    public Builder() {
     }
 
-    public Builder(String goodReviews, String softSkills, String name, String education, String birthday, String knowledge, String skill, String motivation) {
-        super(name, education, birthday, knowledge, skill, motivation);
+    public Builder(String goodReviews, String softSkills) {
+        super();
         this.goodReviews = goodReviews;
         this.softSkills = softSkills;
     }
