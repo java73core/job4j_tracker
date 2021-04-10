@@ -8,6 +8,13 @@ public class Profession {
     public Profession() {
     }
 
+    public Profession(String name, String surname, String education, String birthday) {
+        this.name = name;
+        this.surname = surname;
+        this.birthday = birthday;
+        this.education = education;
+    }
+
     public String getName() {
         return this.name;
     }
