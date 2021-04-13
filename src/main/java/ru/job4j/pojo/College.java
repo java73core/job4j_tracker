@@ -7,7 +7,7 @@ public class College {
         student.setSurname("Sidorov");
         student.setGroupe("EconomFack");
         student.setDate(2010);
-        System.out.println("name: " + student.getName() + "\n" + "surname: " + student.getSurname());
-        System.out.println("Groupe: " + student.getGroupe() + "\n" + "data: " + student.getDate());
+        System.out.println("name: " + student.getName() + System.lineSeparator() + "surname: " + student.getSurname());
+        System.out.println("Groupe: " + student.getGroupe() + System.lineSeparator() + "data: " + student.getDate());
     }
 }
