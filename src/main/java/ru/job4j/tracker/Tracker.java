@@ -28,10 +28,13 @@ public class Tracker {
     }
 
     public boolean delete(int id) {
-        System.arraycopy(items, indexOf(id) + 1, items, indexOf(id), size - id);
-        items[size - 1] = null;
-        size--;
-        return true;
+        if (indexOf(id) != -1) {
+            System.arraycopy(items, indexOf(id) + 1, items, indexOf(id), size - id);
+            items[size - 1] = null;
+            size--;
+            return true;
+        }
+        return false;
     }
 
     public Item add(Item item) {
