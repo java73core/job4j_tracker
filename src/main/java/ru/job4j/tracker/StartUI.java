@@ -11,8 +11,8 @@ public class StartUI {
 
     public static void main(String[] args) {
         Tracker tracker = new Tracker();
-        tracker.add(new Item(1,"Тест1"));
-        tracker.add(new Item(2,"Тест1"));
+        tracker.add(new Item(1, "Тест1"));
+        tracker.add(new Item(2, "Тест1"));
         Item[] mas = new Item[100];
         mas = tracker.findByName("Тест1");
         for (int i = 0; i < mas.length; i++) {
