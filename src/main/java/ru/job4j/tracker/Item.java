@@ -10,15 +10,6 @@ public class Item {
     public Item() {
     }
 
-    @Override
-    public String toString() {
-        return "Item{"
-               + "id=" + id
-               + ", name='" + name + '\''
-              + ", created=" + created
-               + '}';
-    }
-
     public Item(String name) {
         this.name = name;
     }
@@ -26,6 +17,15 @@ public class Item {
     public Item(int id, String name) {
         this.name = name;
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{"
+               + "id=" + id
+               + ", name='" + name + '\''
+              + ", created=" + created
+               + '}';
     }
 
     public Item(LocalDateTime created) {
