@@ -63,13 +63,6 @@ public class Tracker {
     }
 
     public Item[] findAll() {
-        Item[] first = new Item[size];
-        int count = 0;
-        for (int i = 0; i < size; i++) {
-            if (items[i] != null) {
-                first[count++] = items[i];
-            }
-        }
-        return Arrays.copyOf(first, count);
+        return Arrays.copyOf(items, size);
     }
 }
