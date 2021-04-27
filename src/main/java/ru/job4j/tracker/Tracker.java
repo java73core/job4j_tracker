@@ -7,6 +7,15 @@ public class Tracker {
     private int ids = 1;
     private int size = 0;
 
+    @Override
+    public String toString() {
+        return "Tracker{" +
+                "items=" + Arrays.toString(items) +
+                ", ids=" + ids +
+                ", size=" + size +
+                '}';
+    }
+
     private int indexOf(int id) {
         int rsl = -1;
         for (int index = 0; index < size; index++) {
@@ -46,9 +55,7 @@ public class Tracker {
     }
 
     public Item findById(int id) {
-        /* Находим индекс */
         int index = indexOf(id);
-        /* Если индекс найден возвращаем item, иначе null */
         return index != -1 ? items[index] : null;
     }
 
