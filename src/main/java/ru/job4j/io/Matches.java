@@ -12,10 +12,17 @@ public class Matches {
             String player = turn ? "Первый игрок" : "Второй игрок";
             System.out.println(player + " введите число от 1 до 3:");
             int matches = Integer.valueOf(input.nextLine());
-            turn = !turn;
-            count = count - matches;
-            System.out.println("Осталось " + count + " спичек." );
-            /* Остальная логика игры. */
+            if (count >= matches) {
+                if (matches > 0 && matches <= 3) {
+                    turn = !turn;
+                    count = count - matches;
+                    System.out.println("Осталось " + count + " спичек.");
+                } else {
+                    System.out.println("Введённое число находится вне диапазона.");
+                }
+            } else {
+                System.out.println("такого количества спичек нет");
+            }
         }
         if (!turn) {
             System.out.println("Выиграл первый игрок");
