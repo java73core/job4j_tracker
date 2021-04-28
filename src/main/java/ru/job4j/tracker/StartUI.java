@@ -25,16 +25,17 @@ public class StartUI {
             } else if (select == 1) {
                 System.out.println("=== Show all items ===");
                 Item[] item = tracker.findAll();
-                System.out.println(Arrays.toString(item));
+                for (Item a: item) {
+                    System.out.println(a);
+                }
+
             } else if (select == 2) {
                 System.out.println("=== Edit item ===");
                 System.out.println("Input Id: ");
                 int id = Integer.valueOf(scanner.nextLine());
                 System.out.println("Input Name: ");
                 String name = scanner.nextLine();
-                Item newItem = new Item();
-                newItem.setName(name);
-                tracker.replace(id, newItem);
+                Item newItem = new Item(name);
                 if (tracker.replace(id, newItem)) {
                     System.out.println("Replace was successfully");
                 } else {
@@ -44,8 +45,7 @@ public class StartUI {
                 System.out.println("=== Delete item ===");
                 System.out.println("Input id: ");
                int id = Integer.valueOf(scanner.nextLine());
-                tracker.delete(id);
-                if (tracker.delete(id)) {
+               if (tracker.delete(id)) {
                     System.out.println("Delete was successfully");
                 } else {
                     System.out.println("===Error===");
@@ -65,8 +65,10 @@ public class StartUI {
                 System.out.println("Input Name for searching: ");
                 String name = scanner.nextLine();
                 Item[] itemName = tracker.findByName(name);
-                if (itemName != null) {
-                    System.out.println(Arrays.toString(itemName));
+                if (itemName.length != 0) {
+                    for (Item a: itemName) {
+                        System.out.println(a);
+                    }
                 } else {
                     System.out.println("Заявки с таким именем не найдены");
                 }
