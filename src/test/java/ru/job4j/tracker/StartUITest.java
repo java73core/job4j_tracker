@@ -16,5 +16,16 @@ public class StartUITest {
         assertThat(created.getName(), is(expected.getName()));
     }
 
+    @Test
+    public void whenCreateItem() {
+        String[] answers = {"Create PC"};
+        Input input = new StubInput(answers);
+        Tracker tracker = new Tracker();
+        StartUI.createItem(input, tracker);
+        Item created = tracker.findAll()[0];
+        Item expected = new Item("Create PC");
+        assertThat(created.getName(), is(expected.getName()));
+    }
+
 
 }
