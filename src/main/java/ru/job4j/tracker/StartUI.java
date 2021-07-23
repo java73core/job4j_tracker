@@ -3,11 +3,6 @@ package ru.job4j.tracker;
 import java.time.format.DateTimeFormatter;
 
 public class StartUI {
-    public static void item() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
-        Item currentDateTimeFormat = new Item();
-        System.out.println("Текущие дата и время после форматирования: " +  currentDateTimeFormat.getCreated().format(formatter));
-    }
 
     public static void createItem(Input input, Tracker tracker) {
         System.out.println("=== Create a new Item ====");
@@ -19,8 +14,12 @@ public class StartUI {
     public static void showItem(Input input, Tracker tracker) {
         System.out.println("=== Show all items ===");
         Item[] item = tracker.findAll();
+        if (item.length > 0) {
         for (Item a: item) {
             System.out.println(a);
+            }
+        } else {
+            System.out.println("Хранилище еще не содержит заявок");
         }
     }
 
