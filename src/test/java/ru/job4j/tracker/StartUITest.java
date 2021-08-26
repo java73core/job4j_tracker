@@ -42,7 +42,6 @@ public class StartUITest {
         Output out = new StubOutput();
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("FirstName"));
-        String expected = item.getName();
         Input in = new StubInput(
                 new String[] {"0",String.valueOf(item.getId()), "1"}
         );
@@ -51,7 +50,14 @@ public class StartUITest {
                 new ExitAction(out)
         };
         new StartUI(out).init(in, tracker, actions);
-        assertThat(tracker.findById(item.getId()).getName(), is(expected));
+        assertThat(out.toString(), is("Menu:" + System.lineSeparator() +
+                "0. Find items by name" + System.lineSeparator() +
+                "1. Exit" + System.lineSeparator() +
+                "=== Find items by name ===" +  System.lineSeparator() +
+                "Заявки с таким именем не найдены" + System.lineSeparator() +
+                "Menu:" + System.lineSeparator() +
+                "0. Find items by name" + System.lineSeparator() +
+                "1. Exit" + System.lineSeparator()));
     }
 
     @Test
@@ -72,7 +78,7 @@ public class StartUITest {
                         "0. Show all items" + System.lineSeparator() +
                         "1. Exit" + System.lineSeparator() +
                         "=== Show all items ===" +  System.lineSeparator() +
-                        item.toString() + System.lineSeparator() + "Menu:" + System.lineSeparator() +
+                        item + System.lineSeparator() + "Menu:" + System.lineSeparator() +
                 "0. Show all items" + System.lineSeparator() +
                 "1. Exit" + System.lineSeparator()));
     }
@@ -90,7 +96,14 @@ public class StartUITest {
                 new ExitAction(out)
         };
         new StartUI(out).init(in, tracker, actions);
-        assertThat(tracker.findById(item.getId()).getName(), is(replacedName));
+        assertThat(out.toString(), is("Menu:" + System.lineSeparator() +
+                "0. Edit item" + System.lineSeparator() +
+                "1. Exit" + System.lineSeparator() +
+                "=== Edit item ===" +  System.lineSeparator() +
+                "Replace was successfully" + System.lineSeparator() +
+                "Menu:" + System.lineSeparator() +
+                "0. Edit item" + System.lineSeparator() +
+                "1. Exit" + System.lineSeparator()));
     }
 
     @Test
