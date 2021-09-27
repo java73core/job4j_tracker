@@ -6,8 +6,11 @@ public class FindEl{
         for (int i = 0; i < value.length; i++) {
             if(value[i].equals(key)){
                 rsl = i;
+                break;
             }
-        } if(rsl<0) throw new ElementNotFoundException(" Element not found!");
+        } if(rsl<0) {
+            throw new ElementNotFoundException(" Element not found!");
+         }
          return rsl;
     }
 
