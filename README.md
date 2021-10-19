@@ -1,8 +1,9 @@
 # job4j_tracker
-This project have a simple aim. 
-Styding Java Core and something else.
+This project have a simple aim.
+Studying Java Core and something else.
+Aim  job4trucker write programm, which will can example really job program.
 
 
-Contacts: 
+Contacts:
 Andrey Mironov
 89061414206
