@@ -5,7 +5,7 @@ public class UserStore {
     public static User findUser(User[] users, String login) throws UserNotFoundException {
         User result = null;
         for (User s: users) {
-            if (s.equals(login)) {
+            if (s.getUsername().equals(login)) {
                 result = s;
                 break;
             }
@@ -39,10 +39,5 @@ public class UserStore {
         } catch (ElementNotFoundException en) {
             en.printStackTrace();
             System.out.println("Пользователь не найден");
-        } catch (Exception e) {
-            e.printStackTrace();
-        } catch (Throwable th) {
-            th.printStackTrace();
-        }
     }
-}
+}}
