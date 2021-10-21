@@ -18,25 +18,28 @@ public class ValidateInputTest {
     }
 
     @Test
-    public void whenValidInput() {
+    public void whenMultiValidInput() {
         Output out = new StubOutput();
+        int[] array = {5,2,6,4};
         Input in = new StubInput(
-                   new String[] {"5"}
+                   new String[] {"5","2","6","4"}
         );
         ValidateInput input = new ValidateInput(out, in);
+        for(int i = 0; i < array.length; i++){
         int selected = input.askInt("Enter menu:");
-        assertThat(selected, is(5));
+                assertThat(selected, is(array[i]));
+        }
     }
 
     @Test
-    public void whenInValidInputMinus() {
+    public void whenValidInputMinus() {
         Output out = new StubOutput();
         Input in = new StubInput(
-                new String[] {"-1","0"}
+                new String[] {"-1","1"}
         );
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
-        assertThat(selected, is(0));
+        assertThat(selected, is(1));
     }
 
 }
