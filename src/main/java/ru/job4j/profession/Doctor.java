@@ -11,6 +11,14 @@ public class Doctor extends Profession {
         super();
     }
 
+    public Doctor(String name, String education, String birthday,
+                  String experience, String license, char sex) {
+        super(name, education, birthday);
+        this.experience = experience;
+        this.license = license;
+        this.sex = sex;
+    }
+
     public String getExperience() {
         return this.experience;
     }
@@ -23,13 +31,6 @@ public class Doctor extends Profession {
     public char getSex() {
 
         return this.sex;
-    }
-
-   public Doctor(String name, String education, String birthday, String experience, String license, char sex) {
-        super(name, education, birthday);
-        this.experience = experience;
-        this.license = license;
-        this.sex = sex;
     }
 
      public Diagnosis heal(Pacient pacient) {

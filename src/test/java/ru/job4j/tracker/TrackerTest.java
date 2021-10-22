@@ -27,8 +27,6 @@ public class TrackerTest {
         assertThat(tracker.findById(id), is(nullValue()));
     }
 
-
-
     @Test
     public void whenReplace() {
         Tracker tracker = new Tracker();

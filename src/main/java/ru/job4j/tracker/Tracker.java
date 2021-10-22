@@ -9,11 +9,11 @@ public class Tracker {
 
     @Override
     public String toString() {
-        return "Tracker{" +
-                "items=" + Arrays.toString(items) +
-                ", ids=" + ids +
-                ", size=" + size +
-                '}';
+        return "Tracker{"
+                + "items=" + Arrays.toString(items)
+                + ", ids=" + ids
+                + ", size=" + size
+                + '}';
     }
 
     private int indexOf(int id) {
