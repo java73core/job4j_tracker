@@ -1,32 +1,36 @@
 package ru.job4j.tracker;
 
 public final class SingleTracker {
+    private static SingleTracker instance = null;
     private Tracker tracker = new Tracker();
 
     private SingleTracker() {
     }
-    private static SingleTracker singleTracker;
 
-    public static synchronized SingleTracker getSingleTracker() {
-        if (singleTracker == null) {
-            singleTracker = new SingleTracker();
+    public static SingleTracker getInstance() {
+        if (instance == null) {
+            instance = new SingleTracker();
         }
-        return singleTracker;
+        return instance;
     }
 
     public Item add(Item item) {
         return tracker.add(item);
     }
 
+    public boolean delete(int id) {
+        tracker.delete(id); return true;
+    }
+
     public Item findById(int id) {
-        return null;
+        return tracker.findById(id);
     }
 
     public Item[] findByName(String key) {
-        return null;
+        return tracker.findByName(key);
     }
 
     public Item[] findAll() {
-        return null;
+        return tracker.findAll();
     }
 }
