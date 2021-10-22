@@ -4,18 +4,6 @@ public class ValidateInput implements Input {
     private final Output out;
     private final Input in;
 
-    private boolean isNumber(String value) {
-        boolean rsl = true;
-        char[] check = value.toCharArray();
-        for (char num : check) {
-            if (num < 48 || num > 57) {
-                rsl = false;
-                break;
-            }
-        }
-        return rsl;
-    }
-
     public ValidateInput(Output out, Input input) {
         this.out = out;
         this.in = input;
