@@ -13,12 +13,6 @@ public class Task {
         return desc;
     }
 
-    @Override
-    public String toString() {
-        return "Task{" +
-                "desc='" + desc;
-    }
-
     public int getPriority() {
         return priority;
     }
