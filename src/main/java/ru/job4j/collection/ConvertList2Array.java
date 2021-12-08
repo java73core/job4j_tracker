@@ -6,7 +6,7 @@ public class ConvertList2Array {
     public static int[][] toArray(List<Integer> list, int cells) {
         int groups = (int) Math.ceil((double) list.size() / cells);
         int[][] array = new int[groups][cells];
-            for(int j = 0, i = 0; j < groups; j++) {
+            for (int j = 0, i = 0; j < groups; j++) {
                 for (int k = 0; k < cells; k++) {
                    if (i < 7) {
                        array[j][k] = list.get(i++);
