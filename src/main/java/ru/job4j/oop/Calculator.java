@@ -19,6 +19,7 @@ public class Calculator {
     public int multiply(int y) {
         return y * x;
     }
+
     public int sumAllOperation(int y) {
         return sum(y) + multiply(y) + minus(y) + divide(y);
     }
