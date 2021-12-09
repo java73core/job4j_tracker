@@ -11,7 +11,8 @@ public class UniqueText {
         HashSet<String> check = new HashSet<>(Arrays.asList(origin));
         for (String str : text) {
              if (!check.contains(str)) {
-                 rsl = false; };
+                 rsl = false;
+             }
         }
         return rsl;
     }
