@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class ItemAscByNameTest {
 
     @Test
-    public void ItemAscByName() {
+    public void itemAsced() {
               List<Item> items = List.of(
                       new Item(5, "five"),
                       new Item(2, "two"),

@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class ItemDescByNameTest {
 
         @Test
-        public void ItemDescByName() {
+        public void itemDescend() {
             List<Item> items = List.of(
                     new Item(5, "five"),
                     new Item(2, "two"),
