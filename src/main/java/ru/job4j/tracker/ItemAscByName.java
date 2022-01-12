@@ -1,13 +1,11 @@
 package ru.job4j.tracker;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Comparator;
 
-public class ItemAscByName {
+public class ItemAscByName  implements Comparator<Item> {
 
-    public List<Item> sorted(List<Item> items) {
-      return items.stream()
-              .sorted((o1, o2) -> o1.getName().compareTo(o2.getName()))
-              .collect(Collectors.toList());
+    @Override
+    public int compare(Item o1, Item o2) {
+        return o1.getName().compareTo(o2.getName());
     }
 }
