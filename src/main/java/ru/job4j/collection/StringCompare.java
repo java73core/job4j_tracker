@@ -12,15 +12,13 @@ public class StringCompare implements Comparator<String> {
             for (int i = 0; i < cleft.length; i++) {
                 rsl = rsl + Character.compare(cleft[i], cright[i]);
             }
-        } else
-        {
+        } else {
             rsl = left.length() - right.length();
             if (left.length() > right.length()) {
                 for (int i = 0; i < cright.length; i++) {
                     rsl = rsl + Character.compare(cleft[i], cright[i]);
                 }
-            } else
-            {
+            } else {
                 for (int i = 0; i < cleft.length; i++) {
                     rsl = rsl + Character.compare(cleft[i], cright[i]);
                 }
