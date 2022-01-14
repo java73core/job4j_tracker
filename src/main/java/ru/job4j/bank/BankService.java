@@ -5,16 +5,40 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Класс описывает функционал банковских операций
+ * @author ANDREY MIRONOV
+ * @version 1.0
+ */
 public class BankService {
+
+    /**
+     * Хранение задания осуществляется в переменной типа Map
+     * Где ключом является пользователь, а значением список возможных счетов
+     */
     private final Map<User, List<Account>> users = new HashMap<>();
+
+    /**
+     * Введён дополнительный список типа ArrayList
+     * для упрощения работы с переменной типа Map
+     */
     private List<Account> listAccount = new ArrayList<>();
 
+    /**
+     * Метод добавляет пользователья в Map
+     * @param user пользователь, который добавляется в карту
+     */
     public void addUser(User user) {
         if (!users.containsKey(user)) {
             users.put(user, null);
         }
     }
 
+    /**
+     * Метод добавляет номер счёта (Account) к пользователю
+     * @param passport данные номера паспотра, по которым определяется пользователь
+     * @param account аккаунт, который нужно добавить
+     */
     public void addAccount(String passport, Account account) {
         User newUser = findByPassport(passport);
         if (newUser != null) {
@@ -23,6 +47,11 @@ public class BankService {
         }
     }
 
+    /**
+     * Метод, который ищет в карте пользователя по данным номера пасторта
+     * @param passport номер паспотра
+     * @return возвращает пользователя, либо null, если он не найден
+     */
     public User findByPassport(String passport) {
         for (User searchUser: users.keySet()) {
             if (searchUser.getPassport().equals(passport)) {
@@ -32,6 +61,12 @@ public class BankService {
         return null;
     }
 
+    /**
+     * Метод, который возвращает аккаунт пользователя по входным параметрам
+     * @param passport номер паспорта
+     * @param requisite номер счёта
+     * @return возвращает аккаунт пользователя
+     */
     public Account findByRequisite(String passport, String requisite) {
         User person = findByPassport(passport);
         if (person != null) {
@@ -45,6 +80,15 @@ public class BankService {
         return null;
     }
 
+    /**
+     * Метод реализующий перевод средств со счёта на счёт
+     * @param srcPassport номер паспорта пользователя который переводит
+     * @param srcRequisite номер счёта пользователя с которого проводится перевод
+     * @param destPassport номер паспорта получателя перевода
+     * @param destRequisite номер счёта получателя
+     * @param amount сумма перевода
+     * @return результат перевода. Выполнен или нет.
+     */
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {
         boolean rsl = false;
