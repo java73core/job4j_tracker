@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
+import static javax.swing.UIManager.get;
 
 /**
  * Класс описывает функционал банковских операций
@@ -22,16 +25,14 @@ public class BankService {
      * Введён дополнительный список типа ArrayList
      * для упрощения работы с переменной типа Map
      */
-    private List<Account> listAccount = new ArrayList<>();
+    private List<Account> accounts = new ArrayList<>();
 
     /**
      * Метод добавляет пользователья в Map
      * @param user пользователь, который добавляется в карту
      */
     public void addUser(User user) {
-        if (!users.containsKey(user)) {
-            users.put(user, null);
-        }
+       users.putIfAbsent(user, accounts);
     }
 
     /**
@@ -40,10 +41,12 @@ public class BankService {
      * @param account аккаунт, который нужно добавить
      */
     public void addAccount(String passport, Account account) {
-        User newUser = findByPassport(passport);
-        if (newUser != null) {
-            listAccount.add(account);
-            users.putIfAbsent(newUser, listAccount);
+        User user = findByPassport(passport);
+        if (user != null) {
+            accounts = users.get(user);
+            if (!accounts.contains(account)) {
+                accounts.add(account);
+            }
         }
     }
 
@@ -94,9 +97,8 @@ public class BankService {
         boolean rsl = false;
         Account accFirst = findByRequisite(srcPassport, srcRequisite);
         Account accSecond = findByRequisite(destPassport, destRequisite);
-        if (accFirst == null || accFirst.getBalance() < amount) {
-            return rsl;
-        } else {
+        if (accFirst != null && accSecond != null && accFirst.getBalance() >= amount) {
+            accFirst.setBalance(accFirst.getBalance() - amount);
             accSecond.setBalance(accSecond.getBalance() + amount);
             rsl = true;
         }
