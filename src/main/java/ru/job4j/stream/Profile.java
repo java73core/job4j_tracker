@@ -10,4 +10,8 @@ public class Profile {
     public Address getAddress() {
         return address;
     }
+
+//    public int compareTo(Profile i2) {
+//        return Integer.compare(this.address, i2.address);
+//    }
 }
