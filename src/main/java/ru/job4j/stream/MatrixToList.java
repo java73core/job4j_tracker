@@ -9,7 +9,7 @@ public class MatrixToList {
 
     public static List<Integer> convert(Integer[][] matrix) {
         return Stream.of(matrix)
-                .flatMap(integers -> Arrays.stream(integers))
+                .flatMap(Arrays::stream)
                 .collect(Collectors.toList());
     }
 }
