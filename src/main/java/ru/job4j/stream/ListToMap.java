@@ -7,10 +7,9 @@ import java.util.stream.Collectors;
 public class ListToMap {
 
     public static Map<String, Student> convert(List<Student> list) {
-        return list.stream().collect(Collectors
-                        .toMap(Student::getSurname, student ->
-                                student, (o1, o2) -> {
-                            return o1;
-                        }));
+        return list.stream()
+                .collect(Collectors
+                .toMap(Student::getSurname, student ->
+                                student, (o1, o2) -> o1));
     }
 }
