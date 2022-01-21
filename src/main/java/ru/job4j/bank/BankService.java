@@ -68,9 +68,9 @@ public class BankService {
                             .stream()
                             .filter(a -> a.getRequisite().equals(requisite))
                             .findFirst())
-                            .get());
+                            .orElse(Optional.empty()));
         }
-        return null;
+        return Optional.empty();
     }
 
     /**
