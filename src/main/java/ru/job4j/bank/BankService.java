@@ -50,9 +50,9 @@ public class BankService {
      * @return возвращает пользователя, либо null, если он не найден
      */
     public Optional<User> findByPassport(String passport) {
-        return Optional.ofNullable(users.keySet().stream()
+        return users.keySet().stream()
                 .filter(key -> key.getPassport().equals(passport))
-                .findFirst().orElse(null));
+                .findFirst();
     }
 
     /**
@@ -68,7 +68,7 @@ public class BankService {
                             .stream()
                             .filter(a -> a.getRequisite().equals(requisite))
                             .findFirst())
-                    .orElse(null));
+                            .get());
         }
         return null;
     }
