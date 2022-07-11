@@ -14,7 +14,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"9", "0"}
         );
-        Tracker tracker = new Tracker();
+        SqlTracker tracker = new SqlTracker();
         List<UserAction> actions = List.of(new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
@@ -34,7 +34,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0", "Item name", "1"}
         );
-        Tracker tracker = new Tracker();
+        SqlTracker tracker = new SqlTracker();
         List<UserAction> actions = List.of(
                 new CreateAction(out),
                 new ExitAction(out));
@@ -51,7 +51,7 @@ public class StartUITest {
     @Test
     public void whenFindByIdAction() {
         Output out = new StubOutput();
-        Tracker tracker = new Tracker();
+        SqlTracker tracker = new SqlTracker();
         Item item = tracker.add(new Item("FirstName"));
         int expected = item.getId();
         Input in = new StubInput(
@@ -76,7 +76,7 @@ public class StartUITest {
     @Test
     public void whenFindByNameAction() {
         Output out = new StubOutput();
-        Tracker tracker = new Tracker();
+        SqlTracker tracker = new SqlTracker();
         Item item = tracker.add(new Item("FirstName"));
         Input in = new StubInput(
                 new String[] {"0", String.valueOf(item.getId()), "1"}
@@ -99,7 +99,7 @@ public class StartUITest {
     @Test
     public void whenShowAllAction() {
         Output out = new StubOutput();
-        Tracker tracker = new Tracker();
+        SqlTracker tracker = new SqlTracker();
         Item item = tracker.add(new Item("FirstName"));
         Input in = new StubInput(
                 new String[] {"0", "1"}
@@ -121,7 +121,7 @@ public class StartUITest {
     @Test
     public void whenReplaceItem() {
         Output out = new StubOutput();
-        Tracker tracker = new Tracker();
+        SqlTracker tracker = new SqlTracker();
         Item item = tracker.add(new Item("Replaced item"));
         String replacedName = "Newitem";
         Input in = new StubInput(
@@ -144,7 +144,7 @@ public class StartUITest {
     @Test
     public void whenDeleteItem() {
         Output out = new StubOutput();
-        Tracker tracker = new Tracker();
+        SqlTracker tracker = new SqlTracker();
         Item item = tracker.add(new Item("Deleted item"));
         Input in = new StubInput(
                 new String[] {"0", String.valueOf(item.getId()), "1"}
@@ -163,7 +163,7 @@ public class StartUITest {
         Input in = new StubInput(
                 new String[] {"0"}
         );
-        Tracker tracker = new Tracker();
+        SqlTracker tracker = new SqlTracker();
         List<UserAction> actions = List.of(
                 new ExitAction(out));
         new StartUI(out).init(in, tracker, actions);

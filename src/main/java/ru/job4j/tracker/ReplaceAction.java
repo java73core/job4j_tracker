@@ -13,7 +13,7 @@ public class ReplaceAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, SqlTracker tracker) {
         out.println("=== Edit item ===");
         int id = input.askInt("Input Id: ");
         String name = input.askStr("Input Name: ");
