@@ -32,10 +32,7 @@ public class Item implements Comparable<Item> {
 
     @Override
     public String toString() {
-        return "Item{"
-              + "id=" + id
-               + ", name='" + name + '\''
-                + ", created=" + created + '}';
+        return String.format("id: %s, name: %s, created: %s", id, name, FORMATTER.format(created));
     }
 
     @Override

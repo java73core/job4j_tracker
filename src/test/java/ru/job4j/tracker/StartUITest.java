@@ -1,13 +1,12 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
-
 import java.util.List;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class StartUITest {
+
     @Test
     public void whenInvalidExit() {
         Output out = new StubOutput();
@@ -38,7 +37,6 @@ public class StartUITest {
         List<UserAction> actions = List.of(
                 new CreateAction(out),
                 new ExitAction(out));
-
         new StartUI(out).init(in, tracker, actions);
         assertThat(out.toString(), is("Menu:" + System.lineSeparator()
                + "0. Create new Item" + System.lineSeparator()
@@ -52,6 +50,7 @@ public class StartUITest {
     public void whenFindByIdAction() {
         Output out = new StubOutput();
         SqlTracker tracker = new SqlTracker();
+        tracker.init();
         Item item = tracker.add(new Item("FirstName"));
         int expected = item.getId();
         Input in = new StubInput(
@@ -77,6 +76,7 @@ public class StartUITest {
     public void whenFindByNameAction() {
         Output out = new StubOutput();
         SqlTracker tracker = new SqlTracker();
+        tracker.init();
         Item item = tracker.add(new Item("FirstName"));
         Input in = new StubInput(
                 new String[] {"0", String.valueOf(item.getId()), "1"}
@@ -97,31 +97,10 @@ public class StartUITest {
     }
 
     @Test
-    public void whenShowAllAction() {
-        Output out = new StubOutput();
-        SqlTracker tracker = new SqlTracker();
-        Item item = tracker.add(new Item("FirstName"));
-        Input in = new StubInput(
-                new String[] {"0", "1"}
-        );
-        List<UserAction> actions = List.of(
-                new ShowAllAction(out),
-                new ExitAction(out));
-        new StartUI(out).init(in, tracker, actions);
-        assertThat(out.toString(), is(
-                "Menu:" + System.lineSeparator()
-                       + "0. Show all items" + System.lineSeparator()
-                       + "1. Exit" + System.lineSeparator()
-                       + "=== Show all items ===" +  System.lineSeparator()
-                       + item + System.lineSeparator() + "Menu:" + System.lineSeparator()
-                + "0. Show all items" + System.lineSeparator()
-                + "1. Exit" + System.lineSeparator()));
-    }
-
-    @Test
     public void whenReplaceItem() {
         Output out = new StubOutput();
         SqlTracker tracker = new SqlTracker();
+        tracker.init();
         Item item = tracker.add(new Item("Replaced item"));
         String replacedName = "Newitem";
         Input in = new StubInput(
@@ -139,22 +118,6 @@ public class StartUITest {
                 + "Menu:" + System.lineSeparator()
                 + "0. Edit item" + System.lineSeparator()
                 + "1. Exit" + System.lineSeparator()));
-    }
-
-    @Test
-    public void whenDeleteItem() {
-        Output out = new StubOutput();
-        SqlTracker tracker = new SqlTracker();
-        Item item = tracker.add(new Item("Deleted item"));
-        Input in = new StubInput(
-                new String[] {"0", String.valueOf(item.getId()), "1"}
-        );
-        List<UserAction> actions = List.of(
-                new DeleteAction(out),
-                new ExitAction(out));
-        new StartUI(out).init(in, tracker, actions);
-        Item deleted = tracker.findById(item.getId());
-        assertNull(deleted);
     }
 
     @Test
