@@ -1,27 +1,13 @@
 package ru.job4j.tracker;
 
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 public class SqlTracker implements Store, AutoCloseable {
-    private final List<Item> items = new ArrayList<>();
-    private int ids = 1;
     private Connection cn;
-
-    private int indexOf(int id) {
-        int rsl = -1;
-        for (int index = 0; index < items.size(); index++) {
-            if (items.get(index).getId() == id) {
-                rsl = index;
-                break;
-            }
-        }
-        return rsl;
-    }
 
     public void init() {
         try (InputStream in = SqlTracker.class.getClassLoader()
@@ -48,51 +34,111 @@ public class SqlTracker implements Store, AutoCloseable {
 
     @Override
     public Item add(Item item) {
-        item.setId(ids++);
-        items.add(item);
+        try (PreparedStatement statement =
+                     cn.prepareStatement("insert into items(name, created) values (?, ?)",
+                             Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, item.getName());
+            statement.setTimestamp(2, Timestamp.valueOf(item.getCreated()));
+            statement.execute();
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    item.setId(generatedKeys.getInt(1));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return item;
     }
 
     @Override
     public boolean replace(int id, Item item) {
-        int index = indexOf(id);
-        if (index != -1) {
-            item.setId(id);
-            items.set(index, item);
-            return true;
+        boolean flag = false;
+        try (PreparedStatement statement =
+                     cn.prepareStatement("UPDATE items SET name = ? WHERE id = ?;")) {
+            statement.setString(1, item.getName());
+            statement.setInt(2, id);
+            statement.execute();
+            flag = statement.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return false;
+        return flag;
     }
 
     @Override
     public boolean delete(int id) {
-        int index = indexOf(id);
-        if (index != -1) {
-            items.remove(index);
-            return true;
+        boolean flag = false;
+        try (PreparedStatement statement = cn.prepareStatement("DELETE FROM items WHERE id = ?;")) {
+            statement.setInt(1, id);
+            statement.execute();
+            flag = statement.executeUpdate() < 0;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return false;
+        return flag;
     }
 
     @Override
     public List<Item> findAll() {
-        return List.copyOf(items);
+        List<Item> items = new ArrayList<>();
+        try (PreparedStatement statement = cn.prepareStatement("select * from items;")) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    items.add(new Item(
+                            resultSet.getInt("id"),
+                            resultSet.getString("name"),
+                            resultSet.getTimestamp("created").toLocalDateTime()
+                    ));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return items;
     }
 
     @Override
     public List<Item> findByName(String key) {
-        List<Item> result = new ArrayList<>();
-        for (Item item : items) {
-            if (item.getName().equals(key)) {
-                result.add(item);
+        List<Item> items = new ArrayList<>();
+        try (PreparedStatement statement =
+                     cn.prepareStatement("SELECT * FROM items WHERE name = ?;")) {
+            statement.setString(1, key);
+            statement.execute();
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    items.add(new Item(
+                            resultSet.getInt("id"),
+                            resultSet.getString("name"),
+                            resultSet.getTimestamp("created").toLocalDateTime()
+                    ));
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return result;
+        return items;
     }
 
     @Override
     public Item findById(int id) {
-        int index = indexOf(id);
-        return index != -1 ? items.get(index) : null;
+       Item item = new Item();
+        try (PreparedStatement statement =
+                     cn.prepareStatement("SELECT * FROM items WHERE id = ?;")) {
+            statement.setInt(1, id);
+            statement.execute();
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    item = new Item(
+                            resultSet.getInt("id"),
+                            resultSet.getString("name"),
+                            resultSet.getTimestamp("created").toLocalDateTime()
+                    );
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return item;
     }
 }
