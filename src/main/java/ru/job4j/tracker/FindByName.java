@@ -15,7 +15,7 @@ public class FindByName implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, SqlTracker tracker) {
+    public boolean execute(Input input, Store tracker) {
        out.println("=== Find items by name ===");
         String name = input.askStr("Input Name for searching: ");
         List<Item> itemName = tracker.findByName(name);
