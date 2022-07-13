@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
@@ -47,16 +48,32 @@ public class SqlTrackerTest {
     @Test
     public void whenSaveItemAndFindByGeneratedIdThenMustBeTheSame() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item = new Item("item");
-        tracker.add(item);
+        Item item = tracker.add(new Item("item"));
         assertThat(tracker.findById(item.getId()), is(item));
     }
 
     @Test
-    public void whenSaveItemAndFindByNameThenMustBeTheSame() {
+    public void outputItemsInList() {
         SqlTracker tracker = new SqlTracker(connection);
-        Item item = new Item("Item");
-        tracker.add(item);
-        assertThat(tracker.findByName(item.getName()).stream().findFirst().get(), is(item));
+        Item item1 = tracker.add(new Item("item1"));
+        Item item2 = tracker.add(new Item("item2"));
+        Item item3 = tracker.add(new Item("item3"));
+        assertThat(tracker.findAll(), is(List.of(item1, item2, item3)));
+    }
+
+    @Test
+    public void whenReplaceItemAndFindByNameThenMustBeTheSame() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = tracker.add(new Item("item"));
+        tracker.replace(item.getId(), new Item("NewItem"));
+        assertThat(tracker.findByName("NewItem"), is(List.of(tracker.findById(item.getId()))));
+    }
+
+    @Test
+    public void whenDropItemAndMustBeNull() {
+        SqlTracker tracker = new SqlTracker(connection);
+        Item item = tracker.add(new Item("item"));
+        tracker.delete(item.getId());
+        assertNull(tracker.findById(item.getId()));
     }
 }
