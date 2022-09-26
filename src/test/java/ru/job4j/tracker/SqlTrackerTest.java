@@ -17,8 +17,7 @@ public class SqlTrackerTest {
 
     @BeforeClass
     public static void initConnection() {
-        try (InputStream in = SqlTrackerTest.class.getClassLoader()
-                .getResourceAsStream("test.properties")) {
+        try (InputStream in = SqlTrackerTest.class.getClassLoader().getResourceAsStream("test.properties")) {
             Properties config = new Properties();
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
@@ -44,8 +43,6 @@ public class SqlTrackerTest {
             statement.execute();
         }
     }
-
-    @Ignore
     @Test
     public void whenSaveItemAndFindByGeneratedIdThenMustBeTheSame() {
         SqlTracker tracker = new SqlTracker(connection);
@@ -53,7 +50,6 @@ public class SqlTrackerTest {
         assertThat(tracker.findById(item.getId()), is(item));
     }
 
-    @Ignore
     @Test
     public void whenOutputItemsInList() {
         SqlTracker tracker = new SqlTracker(connection);
@@ -63,7 +59,7 @@ public class SqlTrackerTest {
         assertThat(tracker.findAll(), is(List.of(item1, item2, item3)));
     }
 
-    @Ignore
+
     @Test
     public void whenFindByNameItemsInList() {
         SqlTracker tracker = new SqlTracker(connection);
@@ -76,7 +72,7 @@ public class SqlTrackerTest {
         assertThat(tracker.findByName("item"), is(List.of(item1, item3, item5)));
     }
 
-    @Ignore
+
     @Test
     public void whenReplaceItemAndFindByNameThenMustBeTheSame() {
         SqlTracker tracker = new SqlTracker(connection);
@@ -85,7 +81,7 @@ public class SqlTrackerTest {
         assertThat(tracker.findByName("NewItem"), is(List.of(tracker.findById(item.getId()))));
     }
 
-    @Ignore
+
     @Test
     public void whenDropItemAndMustBeNull() {
         SqlTracker tracker = new SqlTracker(connection);
