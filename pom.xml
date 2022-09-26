@@ -29,25 +29,6 @@
                 <liquibase.config>db/liquibase.properties</liquibase.config>
             </properties>
         </profile>
-<!--        <profile>-->
-<!--&lt;!&ndash;            <id>test</id>&ndash;&gt;-->
-<!--&lt;!&ndash;            <properties>&ndash;&gt;-->
-<!--&lt;!&ndash;                <db.url>jdbc:h2:${basedir}/testdb;MODE=PostgreSQL;CASE_INSENSITIVE_IDENTIFIERS=TRUE;</db.url>&ndash;&gt;-->
-<!--&lt;!&ndash;                <db.username></db.username>&ndash;&gt;-->
-<!--&lt;!&ndash;                <db.password></db.password>&ndash;&gt;-->
-<!--&lt;!&ndash;                <db.driver>org.h2.Driver</db.driver>&ndash;&gt;-->
-<!--&lt;!&ndash;            </properties>&ndash;&gt;-->
-<!--&lt;!&ndash;            <activation>&ndash;&gt;-->
-<!--&lt;!&ndash;                <activeByDefault>true</activeByDefault>&ndash;&gt;-->
-<!--&lt;!&ndash;            </activation>&ndash;&gt;-->
-<!--        </profile>-->
-<!--        <profile>-->
-<!--&lt;!&ndash;            <id>production</id>&ndash;&gt;-->
-<!--&lt;!&ndash;            <properties>&ndash;&gt;-->
-<!--&lt;!&ndash;                <db.url>jdbc:postgresql://127.0.0.1:5432/tracker</db.url>&ndash;&gt;-->
-<!--&lt;!&ndash;                <db.driver>org.postgresql.Driver</db.driver>&ndash;&gt;-->
-<!--&lt;!&ndash;            </properties>&ndash;&gt;-->
-<!--        </profile>-->
     </profiles>
     <dependencies>
         <dependency>
